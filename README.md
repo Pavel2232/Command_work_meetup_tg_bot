@@ -14,13 +14,7 @@ Telegram bot для реализации функционала организа
 ## Требования к использованию
 
 Требуется [Python](https://www.python.org/downloads/) версии 3.7 или выше и установленный [pip](https://pip.pypa.io/en/stable/getting-started/). Для установки необходимых зависимостей используйте команду:  
-1. Для PIP:
-```commandline
-python -m pip install -r requirements.txt
-```
-
-2. Для Poetry:
-```commandline
+1.```commandline
     poetry init
 ```
 
