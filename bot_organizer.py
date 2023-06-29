@@ -16,7 +16,7 @@ import django
 os.environ['DJANGO_SETTINGS_MODULE'] = 'storage.settings'
 django.setup()
 
-from db.models import User, Donation, Event
+from db.models import User, Donation, Event, Alert
 
 env = Env()
 env.read_env()
@@ -128,9 +128,14 @@ async def send_chanel_message(message: types.Message, state: FSMContext):
         await message.answer('Главное меню', reply_markup=start_button())
     else:
         await state.finish()
-        await bot.send_message(chat_id=env('ID_CHAT_CHANEL'), text=textwrap.dedent(f'''
-        ‼️‼️‼️ВАЖНОЕ СООБЩЕНИЕ‼️‼️‼️
-        {message.text.upper()}'''))
+        await Alert.objects.acreate(
+            text=textwrap.dedent(
+                f'''
+                #‼️‼️‼️ВАЖНОЕ СООБЩЕНИЕ‼️‼️‼️
+                #{message.text.upper()}
+                '''
+            )
+        )
         await message.answer('Уведомление отправлено', reply_markup=inform_everyone_button())
 
 
